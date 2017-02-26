@@ -1,5 +1,6 @@
 from statics import BOARD_SIDE_LENGTH
 
+
 class WinConditionChecker:
 
     def __init__(self, board, player_1_win_condition, player_2_win_condition):

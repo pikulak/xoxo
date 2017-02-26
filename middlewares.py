@@ -1,3 +1,5 @@
+
+
 class GameGraphicsMiddleware():
 
     def __init__(self, game):
@@ -5,7 +7,7 @@ class GameGraphicsMiddleware():
         self._info = ""
 
     def get_title(self):
-        return self._game
+        return self._game.title
 
     def get_state(self):
         return self._game.state
@@ -15,6 +17,9 @@ class GameGraphicsMiddleware():
 
     def get_players(self):
         return self._game.players
+
+    def get_turn(self):
+        return self._game.turn
 
     def set_info(self, new_info):
         self._info = new_info

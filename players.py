@@ -3,10 +3,12 @@ import random
 from prototypes import PlayerPrototype
 from prototypes import ArtificialPlayerPrototype
 
+
 class HumanPlayer(PlayerPrototype):
 
     def move(self):
         return self._input.get_next_move(self)
+
 
 class ArtificialPlayer(ArtificialPlayerPrototype):
 

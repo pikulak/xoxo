@@ -3,10 +3,11 @@ import random
 import os
 
 from players import HumanPlayer, ArtificialPlayer
-from graphics import GraphicsPrototype, ConsoleGraphics
+from graphics import ConsoleGraphics, WebGraphics
 from middlewares import GameGraphicsMiddleware
 from statics import PLAYER_1_ID, PLAYER_2_ID, MOVE_FAILED_FEEDBACK
 from checkers import WinConditionChecker
+from prototypes import GraphicsPrototype
 
 class Board:
 
@@ -45,7 +46,6 @@ class Board:
 
     def is_move_possible(self, move):
         if move in self.get_available_moves():
-            print("hehehe")
             return True
         else:
             return False
@@ -58,7 +58,8 @@ class Board:
             return False
 
     def clear(self):
-        self._state = {x:" " for x in range(1, 10)}
+        self._state = {x:"#" for x in range(1, 10)}
+
 
 class Game:
     
@@ -69,7 +70,7 @@ class Game:
         self._board = Board()
         self._title = "Kolko i krzyzyk"
         self._middleware = GameGraphicsMiddleware(self)
-        self._graphics = ConsoleGraphics(self._middleware)
+        self._graphics = WebGraphics(self._middleware)
 
     @property
     def winner(self):
@@ -109,6 +110,9 @@ class Game:
             self._graphics = new_graphics
         else:
             raise ValueError("Specifed graphics doesn't implement GraphicalInterface class")
+
+    def init_graphics(self):
+        self._graphics.init()
 
     def get_player(self, which):
         return self._players[which]
@@ -161,7 +165,6 @@ class Game:
         return False
 
     def start(self):
-        self._graphics.draw()
 
         player_1_marker = input("Choose mark for first player: ")
         game_with_ai = input("Do you want play with ai? (y/n): ")
@@ -186,6 +189,7 @@ class Game:
         self.add_player(player_2)
         
         self._board.clear()
+        self._graphics.init()
         self._graphics.draw()
 
     def end(self):
@@ -199,6 +203,7 @@ class Game:
         while self.check_win() is not True and len(self._board.get_available_moves()) > 0:
             self.tick()
         self.end()
+
 
 if __name__ == "__main__":
     game = Game()
