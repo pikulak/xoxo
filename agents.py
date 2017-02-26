@@ -1,6 +1,6 @@
 
 
-class GameGraphicsMiddleware():
+class GameGraphicsAgent():
 
     def __init__(self, game):
         self._game = game

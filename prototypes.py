@@ -32,8 +32,8 @@ class ArtificialPlayerPrototype(PlayerPrototype):
 
 class GraphicsPrototype:
 
-    def __init__(self, middleware):
-        self._middleware = middleware
+    def __init__(self, game_graphics_agent):
+        self._game_graphics_agent = game_graphics_agent
     
     @abstractmethod
     def init(self):

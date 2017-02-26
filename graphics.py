@@ -6,9 +6,9 @@ from prototypes import GraphicsPrototype
 from servers import WebServer
 
 class WebGraphics(GraphicsPrototype):
-    def __init__(self, middleware):
-        super(WebGraphics, self).__init__(middleware)
-        self._title = self._middleware.get_title()
+    def __init__(self, game_graphics_agent):
+        super(WebGraphics, self).__init__(game_graphics_agent)
+        self._title = self._game_graphics_agent.get_title()
         self._header = ""
 
     def init(self):
@@ -16,7 +16,7 @@ class WebGraphics(GraphicsPrototype):
         WebServer.run()
 
     def make_header(self):
-        players = self._middleware.get_players()
+        players = self._game_graphics_agent.get_players()
         header = ""
         if len(players) > 1:
             player_1 = players[PLAYER_1_ID]
@@ -31,16 +31,16 @@ class WebGraphics(GraphicsPrototype):
     def draw(self):
         WebServer.render_kwargs = {"title": self._title,
                                    "header": self._header,
-                                   "state": self._middleware.get_state(),
-                                   "info": self._middleware.get_info()}
+                                   "state": self._game_graphics_agent.get_state(),
+                                   "info": self._game_graphics_agent.get_info()}
 
 
 
 class ConsoleGraphics(GraphicsPrototype):
 
-    def __init__(self, middleware):
-        super(ConsoleGraphics, self).__init__(middleware)
-        self._title = self._middleware.get_title()
+    def __init__(self, game_graphics_agent):
+        super(ConsoleGraphics, self).__init__(game_graphics_agent)
+        self._title = self._game_graphics_agent.get_title()
         self._header = ""
 
 
@@ -48,7 +48,7 @@ class ConsoleGraphics(GraphicsPrototype):
         self._header = self.make_header()
 
     def make_header(self):
-        players = self._middleware.get_players()
+        players = self._game_graphics_agent.get_players()
         header = ""
         if len(players) > 1:
             player_1 = players[PLAYER_1_ID]
@@ -77,6 +77,6 @@ class ConsoleGraphics(GraphicsPrototype):
                 {info}
                 """.format(title=self._title,
                            header=self._header,
-                           info=self._middleware.get_info(),
-                           s=self._middleware.get_state())
+                           info=self._game_graphics_agent.get_info(),
+                           s=self._game_graphics_agent.get_state())
         print(draw_)

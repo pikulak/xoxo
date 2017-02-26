@@ -4,7 +4,7 @@ import os
 
 from players import HumanPlayer, ArtificialPlayer
 from graphics import ConsoleGraphics, WebGraphics
-from middlewares import GameGraphicsMiddleware
+from agents import GameGraphicsAgent
 from statics import PLAYER_1_ID, PLAYER_2_ID, MOVE_FAILED_FEEDBACK
 from checkers import WinConditionChecker
 from prototypes import GraphicsPrototype
@@ -69,8 +69,8 @@ class Game:
         self._players = []
         self._board = Board()
         self._title = "Kolko i krzyzyk"
-        self._middleware = GameGraphicsMiddleware(self)
-        self._graphics = WebGraphics(self._middleware)
+        self._game_graphics_agent = GameGraphicsAgent(self)
+        self._graphics = WebGraphics(self._game_graphics_agent)
 
     @property
     def winner(self):
@@ -136,11 +136,11 @@ class Game:
                 self._turn = not self._turn
 
                 info = "{} moved successfully!".format(current_player.name)
-                self._middleware.set_info(info)
+                self._game_graphics_agent.set_info(info)
                 self._graphics.draw()
                 break
             else:
-                self._middleware.set_info(MOVE_FAILED_FEEDBACK)
+                self._game_graphics_agent.set_info(MOVE_FAILED_FEEDBACK)
                 self._graphics.draw()
 
     def check_win(self):
