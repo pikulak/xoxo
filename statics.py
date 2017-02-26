@@ -1,0 +1,4 @@
+MOVE_FAILED_FEEDBACK = "You can't move here!"
+BOARD_SIDE_LENGTH = 3
+PLAYER_1_ID = 0
+PLAYER_2_ID = 1
