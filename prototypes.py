@@ -35,9 +35,10 @@ class GraphicsPrototype:
     def __init__(self, middleware):
         self._middleware = middleware
     
+    @abstractmethod
     def init(self):
         raise NotImplementedError
-        
+
     @abstractmethod
     def draw(what):
         raise NotImplementedError

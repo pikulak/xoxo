@@ -18,14 +18,15 @@ table, td {
 	<i>{{ title }} </i> </br>
 	<b>{{ header }} </b>
 	<table>
-		{% for row in range(1, 9, 3) %}
-			<tr>
-			{% for col in range(3) %}
-				<td>{{ state[row+col] }}</td>
+		{% if state %}
+			{% for row in range(1, 9, 3) %}
+				<tr>
+				{% for col in range(3) %}
+					<td>{{ state[row+col] }}</td>
+				{% endfor %}
+				</tr>
 			{% endfor %}
-			</tr>
-		{% endfor %}
-		
+		{% endif %}
 	</table>
 </body>
 </html>
